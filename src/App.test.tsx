@@ -1,16 +1,17 @@
-import { describe, expect as Expect, test } from 'vitest';
-import { render, queryByAttribute } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+
+import { render, screen } from './utils/test.utils';
 
 import App from './App';
 
-const getById = queryByAttribute.bind(null, 'id');
+describe('App', () => {
+	it('renders headline', () => {
+		render(<App />);
 
-describe('App.tsx', () => {
-	test('initial render', () => {
-		const app = render(<App />);
-
-		const appElement = getById(app.container, 'app');
-
-		Expect(appElement).toBeDefined();
+		expect(
+			screen.getByRole('heading', {
+				level: 1,
+			})
+		).toHaveTextContent('Homie');
 	});
 });

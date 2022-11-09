@@ -9,6 +9,7 @@
 		"test": "vitest",
 		"test:pre-commit": "vitest --run",
 		"test:ui": "vitest --ui",
+		"test:coverage": "vitest run --coverage",
 		"preview": "vite preview",
 		"stylelint": "npx stylelint \"**/*.scss\"",
 		"prepare": "husky install"
@@ -19,9 +20,11 @@
 		]
 	},
 	"dependencies": {
+		"clone-deep": "^4.0.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-router-dom": "6",
+		"recursive-diff": "^1.0.8",
 		"sass": "^1.56.0",
 		"scss": "^0.2.4",
 		"vite-plugin-svgr": "^2.2.2"
@@ -37,6 +40,8 @@
 		"@typescript-eslint/eslint-plugin": "^5.13.0",
 		"@typescript-eslint/parser": "^5.0.0",
 		"@vitejs/plugin-react": "^2.2.0",
+		"@vitest/coverage-c8": "^0.25.1",
+		"@vitest/ui": "^0.25.1",
 		"eslint": "^8.27.0",
 		"eslint-config-airbnb-typescript": "^17.0.0",
 		"eslint-plugin-react": "^7.31.10",

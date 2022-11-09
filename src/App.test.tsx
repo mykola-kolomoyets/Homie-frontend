@@ -1,17 +1,17 @@
 import { describe, expect, it } from 'vitest';
 
-import { render, screen } from './utils/test.utils';
+import { cleanup, render, screen } from './utils/test.utils';
 
 import App from './App';
 
+afterEach(() => {
+	cleanup();
+});
+
 describe('App', () => {
-	it('renders headline', () => {
+	it('renders headline on any page', () => {
 		render(<App />);
 
-		expect(
-			screen.getByRole('heading', {
-				level: 1,
-			})
-		).toHaveTextContent('Homie');
+		expect(screen.getAllByText(/Homie/)).toBeDefined();
 	});
 });

@@ -48,7 +48,7 @@ describe('Functions', () => {
 	});
 
 	describe('showDeltaPercents', () => {
-		it('works with invalid values', () => {
+		it('works with invalid and valid values', () => {
 			const invalidValues = [
 				{
 					currentValue: null,

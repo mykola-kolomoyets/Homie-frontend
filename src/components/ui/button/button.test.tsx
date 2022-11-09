@@ -1,15 +1,9 @@
-import { describe, expect, it, vi } from 'vitest';
-import '@testing-library/jest-dom';
-
-import { fireEvent, waitFor } from '@testing-library/react';
+import { vi } from 'vitest';
+// import '@testing-library/jest-dom';
 
 import { cleanup, render, screen, userEvent } from '../../../utils/test.utils';
 
 import { Button } from '.';
-
-/**
- * @jest-environment jsdom
- */
 
 afterEach(() => {
 	cleanup();
@@ -39,19 +33,13 @@ describe('Button', () => {
 	it('by 1 click button clicks 1 time', async () => {
 		render(<Button name="button1" title="Test button 1" onClick={onClick} />);
 
-		let button = screen.getByRole('button', {
-			name: /Test button 1/,
-		});
+		let button = await screen.findByText(/Test button 1/);
 
 		const onClickSpy = vi.spyOn(button, 'click');
 
-		button = screen.getByRole('button', {
-			name: /Test button 1/,
-		});
+		await userEvent.click(button);
 
-		userEvent.click(button).then(() => {
-			expect(onClickSpy).toBeCalledTimes(1);
-		});
+		expect(onClick.mock.calls.length).toEqual(1);
 	});
 
 	it('disabled button is not clickable', async () => {

@@ -1,11 +1,16 @@
-import { describe, expect, it } from 'vitest';
+// import { describe, expect, it } from 'vitest';
+import { screen, render, cleanup } from '../../utils/test.utils';
+// import { describe, expect, beforeEach, it, jest } from '@jest/globals';
 
 import { testController } from './test.controller';
 import { TestModel } from './test.model';
 
-describe('test controller', () => {
-	let initialControllerArgs: TestModel;
+let initialControllerArgs: TestModel;
+afterEach(() => {
+	cleanup();
+});
 
+describe('test controller', () => {
 	beforeEach(() => {
 		initialControllerArgs = {
 			count: 0,

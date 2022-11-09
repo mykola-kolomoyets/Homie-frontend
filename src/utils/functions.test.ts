@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
+import { cleanup } from './test.utils';
+
 import { getDecimalNumber, showDeltaPercents } from './functions';
+
+afterEach(() => {
+	cleanup();
+});
 
 describe('Functions', () => {
 	describe('getDecimalNumber', () => {

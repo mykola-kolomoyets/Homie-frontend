@@ -1,4 +1,4 @@
-import { vi } from 'vitest';
+import { Mock, vi } from 'vitest';
 // import '@testing-library/jest-dom';
 
 import { cleanup, render, screen, userEvent } from '../../../utils/test.utils';
@@ -9,9 +9,13 @@ afterEach(() => {
 	cleanup();
 });
 
-const onClick = vi.fn(() => 0);
+let onClick: Mock<[], number>;
 
 describe('Button', () => {
+	beforeEach(() => {
+		onClick = vi.fn(() => 0);
+	});
+
 	it('mount correctly', () => {
 		render(<Button title="Hello world" />);
 
@@ -33,9 +37,7 @@ describe('Button', () => {
 	it('by 1 click button clicks 1 time', async () => {
 		render(<Button name="button1" title="Test button 1" onClick={onClick} />);
 
-		let button = await screen.findByText(/Test button 1/);
-
-		const onClickSpy = vi.spyOn(button, 'click');
+		let button = screen.getByText(/Test button 1/);
 
 		await userEvent.click(button);
 
@@ -49,12 +51,8 @@ describe('Button', () => {
 
 		const button = screen.getByText(/Hello world/);
 
-		const onClickSpy = vi.spyOn(button, 'click');
+		await userEvent.click(button);
 
-		const buttonContent = screen.getByText(/Hello world/);
-
-		userEvent.click(buttonContent).then(() => {
-			expect(onClickSpy).toHaveBeenCalledTimes(0);
-		});
+		expect(onClick.mock.calls.length).toEqual(0);
 	});
 });
